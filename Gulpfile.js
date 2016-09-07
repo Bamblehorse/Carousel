@@ -68,4 +68,6 @@ gulp.task('watch', ['browserSync', 'sass'], function() {
   gulp.watch('src/scss/**/*.scss', ['clean','sass']);
   // Watch html
   gulp.watch('src/**/*.html', ['refresh']);
+  //watch js
+  gulp.watch('app/js/**/*.js', ['refresh']);
 });
