@@ -1,6 +1,9 @@
 # Carousel :cookie:
 This project is a Carousel.
 
+View (work in progress) here:
+* [Carousel - Live](https://jonathandwood.github.io/Carousel/src/)
+
 It's purpose is to display technical skill in HTML, CSS and Javascript.
 
 I will be using:
