@@ -13,6 +13,7 @@ $primary-color: black;
 body {
   font: 100% $font-stack;
   color: $primary-color;
+  background-color: #00CCFF;
 }
 
 
@@ -23,8 +24,4 @@ header {
   background-color: black;
   border: 2px double ;
   color: white;
-}
-
-carousel {
-
 }

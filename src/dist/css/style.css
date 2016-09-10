@@ -1668,6 +1668,68 @@ table {
   color: #fff;
 }
 
+#carousel {
+  width: 100%;
+  background-color: red;
+  padding: 2.5% 0% 2.5% 0%;
+  text-align: center;
+  position: relative;
+}
+
+.carousel-block {
+  display: inline-block;
+  margin: 0;
+}
+
+#divider {
+  background-color: white;
+  padding: 1px;
+}
+
+#carousel-nav-left,
+#carousel-nav-right {
+  background-color: #FFCC00;
+  font-size: 6vw;
+  position: relative;
+  transform: translateY(25%);
+}
+
+.carousel-ul {
+  list-style: none;
+  display: inline;
+  margin: 0;
+}
+
+.carousel-ul li {
+  display: inline;
+  margin: 0;
+}
+
+#current-image:hover {
+  opacity: auto;
+}
+
+img {
+  width: 70%;
+  display: inline;
+}
+
+.titleBox p {
+  margin: 30px;
+  background-color: white;
+  border: 1px solid black;
+  opacity: 0.6;
+  filter: alpha(opacity=60);
+  position: absolute;
+  text-align: center;
+  top: 50%;
+}
+
+/*Carousel - block
+    Unordered List
+      List items
+        Images
+    Left and Right Navigation */
 /* ==========================================================================
    #CLEARFIX
    ========================================================================== */
@@ -2435,6 +2497,7 @@ table {
 body {
   font: 100% Helvetica, sans-serif;
   color: black;
+  background-color: #00CCFF;
 }
 
 header {

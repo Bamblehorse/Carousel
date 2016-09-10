@@ -128,6 +128,7 @@
 @import "objects/objects.crop";
 @import "objects/objects.tables";
 @import "objects/objects.pack";
+@import "objects/components.carousel"; // <-- CAROUSEL
 
 
 
@@ -137,6 +138,7 @@
 //
 // Build and include your project’s UI Compoments here.
 @import "components/example.components.buttons";
+@import "components/components.carousel1";
 
 
 

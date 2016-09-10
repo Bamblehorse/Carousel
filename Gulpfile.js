@@ -23,7 +23,7 @@ gulp.task('browserSync', function() {
 
 // Sass Variables
 var sassFolder = 'src/scss/**/*.scss';
-var cssFolder = 'src/css';
+var cssFolder = 'src/dist/css';
 var sassStyle = {
   outputStyle: 'expanded'
 };
