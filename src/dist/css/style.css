@@ -1541,6 +1541,25 @@ table {
       List items
         Images
     Left and Right Navigation */
+.o-carousel {
+  position: relative;
+  overflow: hidden;
+  width: 80%;
+  border: 1px solid #666666;
+  border-radius: 5px 5px;
+  background-color: #FFCC00;
+}
+
+.o-carousel__slide {
+  list-style: none;
+  margin: auto 0;
+  position: relative;
+}
+
+.o-carousel__img {
+  width: 100%;
+}
+
 /* ==========================================================================
    #BUTTONS
    ========================================================================== */
@@ -2441,13 +2460,4 @@ body {
   font: 100% Helvetica, sans-serif;
   color: black;
   background-color: #00CCFF;
-}
-
-header {
-  width: 100%;
-  font-size: 2em;
-  text-align: center;
-  background-color: black;
-  border: 2px double;
-  color: white;
 }

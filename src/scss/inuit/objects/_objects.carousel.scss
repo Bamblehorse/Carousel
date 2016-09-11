@@ -6,20 +6,31 @@
 
 //Block__Element--Modifier
 
+$carousel__width : 80%;
+
 .o-carousel {
+  position: relative;
+  overflow: hidden;
+  width: $carousel__width;
+
+  border: 1px solid #666666;
+  border-radius: 5px 5px;
+  background-color: #FFCC00;
 
 }
 
 .o-carousel__slide {
+  list-style: none;
 
+  margin: auto 0;
+  position: relative;
 }
 
 .o-carousel__slide li {
-
 }
 
 .o-carousel__img {
-
+  width: 100%;
 }
 
 .o-carousel__img--current {
