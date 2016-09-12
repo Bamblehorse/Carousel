@@ -1544,7 +1544,7 @@ table {
 .o-carousel {
   position: relative;
   overflow: hidden;
-  width: 80%;
+  width: 40%;
   border: 1px solid #666666;
   border-radius: 5px 5px;
   background-color: #FFCC00;
@@ -2064,6 +2064,1098 @@ table {
  *
  * <div class="u-3/12@mobile">
  */
+@media (min-width: 20em) {
+  .u-1\/1\@mobile {
+    width: 100% !important;
+  }
+  /**
+        * 1. Defensively reset any leftover or conflicting `left`/`right` values.
+        */
+  .u-push-1\/1\@mobile {
+    position: relative;
+    right: auto;
+    /* [1] */
+    left: 100% !important;
+  }
+  .u-pull-1\/1\@mobile {
+    position: relative;
+    right: 100% !important;
+    left: auto;
+    /* [1] */
+  }
+  .u-1\/2\@mobile {
+    width: 50% !important;
+  }
+  /**
+        * 1. Defensively reset any leftover or conflicting `left`/`right` values.
+        */
+  .u-push-1\/2\@mobile {
+    position: relative;
+    right: auto;
+    /* [1] */
+    left: 50% !important;
+  }
+  .u-pull-1\/2\@mobile {
+    position: relative;
+    right: 50% !important;
+    left: auto;
+    /* [1] */
+  }
+  .u-2\/2\@mobile {
+    width: 100% !important;
+  }
+  /**
+        * 1. Defensively reset any leftover or conflicting `left`/`right` values.
+        */
+  .u-push-2\/2\@mobile {
+    position: relative;
+    right: auto;
+    /* [1] */
+    left: 100% !important;
+  }
+  .u-pull-2\/2\@mobile {
+    position: relative;
+    right: 100% !important;
+    left: auto;
+    /* [1] */
+  }
+  .u-1\/3\@mobile {
+    width: 33.33333% !important;
+  }
+  /**
+        * 1. Defensively reset any leftover or conflicting `left`/`right` values.
+        */
+  .u-push-1\/3\@mobile {
+    position: relative;
+    right: auto;
+    /* [1] */
+    left: 33.33333% !important;
+  }
+  .u-pull-1\/3\@mobile {
+    position: relative;
+    right: 33.33333% !important;
+    left: auto;
+    /* [1] */
+  }
+  .u-2\/3\@mobile {
+    width: 66.66667% !important;
+  }
+  /**
+        * 1. Defensively reset any leftover or conflicting `left`/`right` values.
+        */
+  .u-push-2\/3\@mobile {
+    position: relative;
+    right: auto;
+    /* [1] */
+    left: 66.66667% !important;
+  }
+  .u-pull-2\/3\@mobile {
+    position: relative;
+    right: 66.66667% !important;
+    left: auto;
+    /* [1] */
+  }
+  .u-3\/3\@mobile {
+    width: 100% !important;
+  }
+  /**
+        * 1. Defensively reset any leftover or conflicting `left`/`right` values.
+        */
+  .u-push-3\/3\@mobile {
+    position: relative;
+    right: auto;
+    /* [1] */
+    left: 100% !important;
+  }
+  .u-pull-3\/3\@mobile {
+    position: relative;
+    right: 100% !important;
+    left: auto;
+    /* [1] */
+  }
+  .u-1\/4\@mobile {
+    width: 25% !important;
+  }
+  /**
+        * 1. Defensively reset any leftover or conflicting `left`/`right` values.
+        */
+  .u-push-1\/4\@mobile {
+    position: relative;
+    right: auto;
+    /* [1] */
+    left: 25% !important;
+  }
+  .u-pull-1\/4\@mobile {
+    position: relative;
+    right: 25% !important;
+    left: auto;
+    /* [1] */
+  }
+  .u-2\/4\@mobile {
+    width: 50% !important;
+  }
+  /**
+        * 1. Defensively reset any leftover or conflicting `left`/`right` values.
+        */
+  .u-push-2\/4\@mobile {
+    position: relative;
+    right: auto;
+    /* [1] */
+    left: 50% !important;
+  }
+  .u-pull-2\/4\@mobile {
+    position: relative;
+    right: 50% !important;
+    left: auto;
+    /* [1] */
+  }
+  .u-3\/4\@mobile {
+    width: 75% !important;
+  }
+  /**
+        * 1. Defensively reset any leftover or conflicting `left`/`right` values.
+        */
+  .u-push-3\/4\@mobile {
+    position: relative;
+    right: auto;
+    /* [1] */
+    left: 75% !important;
+  }
+  .u-pull-3\/4\@mobile {
+    position: relative;
+    right: 75% !important;
+    left: auto;
+    /* [1] */
+  }
+  .u-4\/4\@mobile {
+    width: 100% !important;
+  }
+  /**
+        * 1. Defensively reset any leftover or conflicting `left`/`right` values.
+        */
+  .u-push-4\/4\@mobile {
+    position: relative;
+    right: auto;
+    /* [1] */
+    left: 100% !important;
+  }
+  .u-pull-4\/4\@mobile {
+    position: relative;
+    right: 100% !important;
+    left: auto;
+    /* [1] */
+  }
+  .u-1\/5\@mobile {
+    width: 20% !important;
+  }
+  /**
+        * 1. Defensively reset any leftover or conflicting `left`/`right` values.
+        */
+  .u-push-1\/5\@mobile {
+    position: relative;
+    right: auto;
+    /* [1] */
+    left: 20% !important;
+  }
+  .u-pull-1\/5\@mobile {
+    position: relative;
+    right: 20% !important;
+    left: auto;
+    /* [1] */
+  }
+  .u-2\/5\@mobile {
+    width: 40% !important;
+  }
+  /**
+        * 1. Defensively reset any leftover or conflicting `left`/`right` values.
+        */
+  .u-push-2\/5\@mobile {
+    position: relative;
+    right: auto;
+    /* [1] */
+    left: 40% !important;
+  }
+  .u-pull-2\/5\@mobile {
+    position: relative;
+    right: 40% !important;
+    left: auto;
+    /* [1] */
+  }
+  .u-3\/5\@mobile {
+    width: 60% !important;
+  }
+  /**
+        * 1. Defensively reset any leftover or conflicting `left`/`right` values.
+        */
+  .u-push-3\/5\@mobile {
+    position: relative;
+    right: auto;
+    /* [1] */
+    left: 60% !important;
+  }
+  .u-pull-3\/5\@mobile {
+    position: relative;
+    right: 60% !important;
+    left: auto;
+    /* [1] */
+  }
+  .u-4\/5\@mobile {
+    width: 80% !important;
+  }
+  /**
+        * 1. Defensively reset any leftover or conflicting `left`/`right` values.
+        */
+  .u-push-4\/5\@mobile {
+    position: relative;
+    right: auto;
+    /* [1] */
+    left: 80% !important;
+  }
+  .u-pull-4\/5\@mobile {
+    position: relative;
+    right: 80% !important;
+    left: auto;
+    /* [1] */
+  }
+  .u-5\/5\@mobile {
+    width: 100% !important;
+  }
+  /**
+        * 1. Defensively reset any leftover or conflicting `left`/`right` values.
+        */
+  .u-push-5\/5\@mobile {
+    position: relative;
+    right: auto;
+    /* [1] */
+    left: 100% !important;
+  }
+  .u-pull-5\/5\@mobile {
+    position: relative;
+    right: 100% !important;
+    left: auto;
+    /* [1] */
+  }
+}
+
+@media (min-width: 46.25em) {
+  .u-1\/1\@tablet {
+    width: 100% !important;
+  }
+  /**
+        * 1. Defensively reset any leftover or conflicting `left`/`right` values.
+        */
+  .u-push-1\/1\@tablet {
+    position: relative;
+    right: auto;
+    /* [1] */
+    left: 100% !important;
+  }
+  .u-pull-1\/1\@tablet {
+    position: relative;
+    right: 100% !important;
+    left: auto;
+    /* [1] */
+  }
+  .u-1\/2\@tablet {
+    width: 50% !important;
+  }
+  /**
+        * 1. Defensively reset any leftover or conflicting `left`/`right` values.
+        */
+  .u-push-1\/2\@tablet {
+    position: relative;
+    right: auto;
+    /* [1] */
+    left: 50% !important;
+  }
+  .u-pull-1\/2\@tablet {
+    position: relative;
+    right: 50% !important;
+    left: auto;
+    /* [1] */
+  }
+  .u-2\/2\@tablet {
+    width: 100% !important;
+  }
+  /**
+        * 1. Defensively reset any leftover or conflicting `left`/`right` values.
+        */
+  .u-push-2\/2\@tablet {
+    position: relative;
+    right: auto;
+    /* [1] */
+    left: 100% !important;
+  }
+  .u-pull-2\/2\@tablet {
+    position: relative;
+    right: 100% !important;
+    left: auto;
+    /* [1] */
+  }
+  .u-1\/3\@tablet {
+    width: 33.33333% !important;
+  }
+  /**
+        * 1. Defensively reset any leftover or conflicting `left`/`right` values.
+        */
+  .u-push-1\/3\@tablet {
+    position: relative;
+    right: auto;
+    /* [1] */
+    left: 33.33333% !important;
+  }
+  .u-pull-1\/3\@tablet {
+    position: relative;
+    right: 33.33333% !important;
+    left: auto;
+    /* [1] */
+  }
+  .u-2\/3\@tablet {
+    width: 66.66667% !important;
+  }
+  /**
+        * 1. Defensively reset any leftover or conflicting `left`/`right` values.
+        */
+  .u-push-2\/3\@tablet {
+    position: relative;
+    right: auto;
+    /* [1] */
+    left: 66.66667% !important;
+  }
+  .u-pull-2\/3\@tablet {
+    position: relative;
+    right: 66.66667% !important;
+    left: auto;
+    /* [1] */
+  }
+  .u-3\/3\@tablet {
+    width: 100% !important;
+  }
+  /**
+        * 1. Defensively reset any leftover or conflicting `left`/`right` values.
+        */
+  .u-push-3\/3\@tablet {
+    position: relative;
+    right: auto;
+    /* [1] */
+    left: 100% !important;
+  }
+  .u-pull-3\/3\@tablet {
+    position: relative;
+    right: 100% !important;
+    left: auto;
+    /* [1] */
+  }
+  .u-1\/4\@tablet {
+    width: 25% !important;
+  }
+  /**
+        * 1. Defensively reset any leftover or conflicting `left`/`right` values.
+        */
+  .u-push-1\/4\@tablet {
+    position: relative;
+    right: auto;
+    /* [1] */
+    left: 25% !important;
+  }
+  .u-pull-1\/4\@tablet {
+    position: relative;
+    right: 25% !important;
+    left: auto;
+    /* [1] */
+  }
+  .u-2\/4\@tablet {
+    width: 50% !important;
+  }
+  /**
+        * 1. Defensively reset any leftover or conflicting `left`/`right` values.
+        */
+  .u-push-2\/4\@tablet {
+    position: relative;
+    right: auto;
+    /* [1] */
+    left: 50% !important;
+  }
+  .u-pull-2\/4\@tablet {
+    position: relative;
+    right: 50% !important;
+    left: auto;
+    /* [1] */
+  }
+  .u-3\/4\@tablet {
+    width: 75% !important;
+  }
+  /**
+        * 1. Defensively reset any leftover or conflicting `left`/`right` values.
+        */
+  .u-push-3\/4\@tablet {
+    position: relative;
+    right: auto;
+    /* [1] */
+    left: 75% !important;
+  }
+  .u-pull-3\/4\@tablet {
+    position: relative;
+    right: 75% !important;
+    left: auto;
+    /* [1] */
+  }
+  .u-4\/4\@tablet {
+    width: 100% !important;
+  }
+  /**
+        * 1. Defensively reset any leftover or conflicting `left`/`right` values.
+        */
+  .u-push-4\/4\@tablet {
+    position: relative;
+    right: auto;
+    /* [1] */
+    left: 100% !important;
+  }
+  .u-pull-4\/4\@tablet {
+    position: relative;
+    right: 100% !important;
+    left: auto;
+    /* [1] */
+  }
+  .u-1\/5\@tablet {
+    width: 20% !important;
+  }
+  /**
+        * 1. Defensively reset any leftover or conflicting `left`/`right` values.
+        */
+  .u-push-1\/5\@tablet {
+    position: relative;
+    right: auto;
+    /* [1] */
+    left: 20% !important;
+  }
+  .u-pull-1\/5\@tablet {
+    position: relative;
+    right: 20% !important;
+    left: auto;
+    /* [1] */
+  }
+  .u-2\/5\@tablet {
+    width: 40% !important;
+  }
+  /**
+        * 1. Defensively reset any leftover or conflicting `left`/`right` values.
+        */
+  .u-push-2\/5\@tablet {
+    position: relative;
+    right: auto;
+    /* [1] */
+    left: 40% !important;
+  }
+  .u-pull-2\/5\@tablet {
+    position: relative;
+    right: 40% !important;
+    left: auto;
+    /* [1] */
+  }
+  .u-3\/5\@tablet {
+    width: 60% !important;
+  }
+  /**
+        * 1. Defensively reset any leftover or conflicting `left`/`right` values.
+        */
+  .u-push-3\/5\@tablet {
+    position: relative;
+    right: auto;
+    /* [1] */
+    left: 60% !important;
+  }
+  .u-pull-3\/5\@tablet {
+    position: relative;
+    right: 60% !important;
+    left: auto;
+    /* [1] */
+  }
+  .u-4\/5\@tablet {
+    width: 80% !important;
+  }
+  /**
+        * 1. Defensively reset any leftover or conflicting `left`/`right` values.
+        */
+  .u-push-4\/5\@tablet {
+    position: relative;
+    right: auto;
+    /* [1] */
+    left: 80% !important;
+  }
+  .u-pull-4\/5\@tablet {
+    position: relative;
+    right: 80% !important;
+    left: auto;
+    /* [1] */
+  }
+  .u-5\/5\@tablet {
+    width: 100% !important;
+  }
+  /**
+        * 1. Defensively reset any leftover or conflicting `left`/`right` values.
+        */
+  .u-push-5\/5\@tablet {
+    position: relative;
+    right: auto;
+    /* [1] */
+    left: 100% !important;
+  }
+  .u-pull-5\/5\@tablet {
+    position: relative;
+    right: 100% !important;
+    left: auto;
+    /* [1] */
+  }
+}
+
+@media (min-width: 61.25em) {
+  .u-1\/1\@desktop {
+    width: 100% !important;
+  }
+  /**
+        * 1. Defensively reset any leftover or conflicting `left`/`right` values.
+        */
+  .u-push-1\/1\@desktop {
+    position: relative;
+    right: auto;
+    /* [1] */
+    left: 100% !important;
+  }
+  .u-pull-1\/1\@desktop {
+    position: relative;
+    right: 100% !important;
+    left: auto;
+    /* [1] */
+  }
+  .u-1\/2\@desktop {
+    width: 50% !important;
+  }
+  /**
+        * 1. Defensively reset any leftover or conflicting `left`/`right` values.
+        */
+  .u-push-1\/2\@desktop {
+    position: relative;
+    right: auto;
+    /* [1] */
+    left: 50% !important;
+  }
+  .u-pull-1\/2\@desktop {
+    position: relative;
+    right: 50% !important;
+    left: auto;
+    /* [1] */
+  }
+  .u-2\/2\@desktop {
+    width: 100% !important;
+  }
+  /**
+        * 1. Defensively reset any leftover or conflicting `left`/`right` values.
+        */
+  .u-push-2\/2\@desktop {
+    position: relative;
+    right: auto;
+    /* [1] */
+    left: 100% !important;
+  }
+  .u-pull-2\/2\@desktop {
+    position: relative;
+    right: 100% !important;
+    left: auto;
+    /* [1] */
+  }
+  .u-1\/3\@desktop {
+    width: 33.33333% !important;
+  }
+  /**
+        * 1. Defensively reset any leftover or conflicting `left`/`right` values.
+        */
+  .u-push-1\/3\@desktop {
+    position: relative;
+    right: auto;
+    /* [1] */
+    left: 33.33333% !important;
+  }
+  .u-pull-1\/3\@desktop {
+    position: relative;
+    right: 33.33333% !important;
+    left: auto;
+    /* [1] */
+  }
+  .u-2\/3\@desktop {
+    width: 66.66667% !important;
+  }
+  /**
+        * 1. Defensively reset any leftover or conflicting `left`/`right` values.
+        */
+  .u-push-2\/3\@desktop {
+    position: relative;
+    right: auto;
+    /* [1] */
+    left: 66.66667% !important;
+  }
+  .u-pull-2\/3\@desktop {
+    position: relative;
+    right: 66.66667% !important;
+    left: auto;
+    /* [1] */
+  }
+  .u-3\/3\@desktop {
+    width: 100% !important;
+  }
+  /**
+        * 1. Defensively reset any leftover or conflicting `left`/`right` values.
+        */
+  .u-push-3\/3\@desktop {
+    position: relative;
+    right: auto;
+    /* [1] */
+    left: 100% !important;
+  }
+  .u-pull-3\/3\@desktop {
+    position: relative;
+    right: 100% !important;
+    left: auto;
+    /* [1] */
+  }
+  .u-1\/4\@desktop {
+    width: 25% !important;
+  }
+  /**
+        * 1. Defensively reset any leftover or conflicting `left`/`right` values.
+        */
+  .u-push-1\/4\@desktop {
+    position: relative;
+    right: auto;
+    /* [1] */
+    left: 25% !important;
+  }
+  .u-pull-1\/4\@desktop {
+    position: relative;
+    right: 25% !important;
+    left: auto;
+    /* [1] */
+  }
+  .u-2\/4\@desktop {
+    width: 50% !important;
+  }
+  /**
+        * 1. Defensively reset any leftover or conflicting `left`/`right` values.
+        */
+  .u-push-2\/4\@desktop {
+    position: relative;
+    right: auto;
+    /* [1] */
+    left: 50% !important;
+  }
+  .u-pull-2\/4\@desktop {
+    position: relative;
+    right: 50% !important;
+    left: auto;
+    /* [1] */
+  }
+  .u-3\/4\@desktop {
+    width: 75% !important;
+  }
+  /**
+        * 1. Defensively reset any leftover or conflicting `left`/`right` values.
+        */
+  .u-push-3\/4\@desktop {
+    position: relative;
+    right: auto;
+    /* [1] */
+    left: 75% !important;
+  }
+  .u-pull-3\/4\@desktop {
+    position: relative;
+    right: 75% !important;
+    left: auto;
+    /* [1] */
+  }
+  .u-4\/4\@desktop {
+    width: 100% !important;
+  }
+  /**
+        * 1. Defensively reset any leftover or conflicting `left`/`right` values.
+        */
+  .u-push-4\/4\@desktop {
+    position: relative;
+    right: auto;
+    /* [1] */
+    left: 100% !important;
+  }
+  .u-pull-4\/4\@desktop {
+    position: relative;
+    right: 100% !important;
+    left: auto;
+    /* [1] */
+  }
+  .u-1\/5\@desktop {
+    width: 20% !important;
+  }
+  /**
+        * 1. Defensively reset any leftover or conflicting `left`/`right` values.
+        */
+  .u-push-1\/5\@desktop {
+    position: relative;
+    right: auto;
+    /* [1] */
+    left: 20% !important;
+  }
+  .u-pull-1\/5\@desktop {
+    position: relative;
+    right: 20% !important;
+    left: auto;
+    /* [1] */
+  }
+  .u-2\/5\@desktop {
+    width: 40% !important;
+  }
+  /**
+        * 1. Defensively reset any leftover or conflicting `left`/`right` values.
+        */
+  .u-push-2\/5\@desktop {
+    position: relative;
+    right: auto;
+    /* [1] */
+    left: 40% !important;
+  }
+  .u-pull-2\/5\@desktop {
+    position: relative;
+    right: 40% !important;
+    left: auto;
+    /* [1] */
+  }
+  .u-3\/5\@desktop {
+    width: 60% !important;
+  }
+  /**
+        * 1. Defensively reset any leftover or conflicting `left`/`right` values.
+        */
+  .u-push-3\/5\@desktop {
+    position: relative;
+    right: auto;
+    /* [1] */
+    left: 60% !important;
+  }
+  .u-pull-3\/5\@desktop {
+    position: relative;
+    right: 60% !important;
+    left: auto;
+    /* [1] */
+  }
+  .u-4\/5\@desktop {
+    width: 80% !important;
+  }
+  /**
+        * 1. Defensively reset any leftover or conflicting `left`/`right` values.
+        */
+  .u-push-4\/5\@desktop {
+    position: relative;
+    right: auto;
+    /* [1] */
+    left: 80% !important;
+  }
+  .u-pull-4\/5\@desktop {
+    position: relative;
+    right: 80% !important;
+    left: auto;
+    /* [1] */
+  }
+  .u-5\/5\@desktop {
+    width: 100% !important;
+  }
+  /**
+        * 1. Defensively reset any leftover or conflicting `left`/`right` values.
+        */
+  .u-push-5\/5\@desktop {
+    position: relative;
+    right: auto;
+    /* [1] */
+    left: 100% !important;
+  }
+  .u-pull-5\/5\@desktop {
+    position: relative;
+    right: 100% !important;
+    left: auto;
+    /* [1] */
+  }
+}
+
+@media (min-width: 81.25em) {
+  .u-1\/1\@wide {
+    width: 100% !important;
+  }
+  /**
+        * 1. Defensively reset any leftover or conflicting `left`/`right` values.
+        */
+  .u-push-1\/1\@wide {
+    position: relative;
+    right: auto;
+    /* [1] */
+    left: 100% !important;
+  }
+  .u-pull-1\/1\@wide {
+    position: relative;
+    right: 100% !important;
+    left: auto;
+    /* [1] */
+  }
+  .u-1\/2\@wide {
+    width: 50% !important;
+  }
+  /**
+        * 1. Defensively reset any leftover or conflicting `left`/`right` values.
+        */
+  .u-push-1\/2\@wide {
+    position: relative;
+    right: auto;
+    /* [1] */
+    left: 50% !important;
+  }
+  .u-pull-1\/2\@wide {
+    position: relative;
+    right: 50% !important;
+    left: auto;
+    /* [1] */
+  }
+  .u-2\/2\@wide {
+    width: 100% !important;
+  }
+  /**
+        * 1. Defensively reset any leftover or conflicting `left`/`right` values.
+        */
+  .u-push-2\/2\@wide {
+    position: relative;
+    right: auto;
+    /* [1] */
+    left: 100% !important;
+  }
+  .u-pull-2\/2\@wide {
+    position: relative;
+    right: 100% !important;
+    left: auto;
+    /* [1] */
+  }
+  .u-1\/3\@wide {
+    width: 33.33333% !important;
+  }
+  /**
+        * 1. Defensively reset any leftover or conflicting `left`/`right` values.
+        */
+  .u-push-1\/3\@wide {
+    position: relative;
+    right: auto;
+    /* [1] */
+    left: 33.33333% !important;
+  }
+  .u-pull-1\/3\@wide {
+    position: relative;
+    right: 33.33333% !important;
+    left: auto;
+    /* [1] */
+  }
+  .u-2\/3\@wide {
+    width: 66.66667% !important;
+  }
+  /**
+        * 1. Defensively reset any leftover or conflicting `left`/`right` values.
+        */
+  .u-push-2\/3\@wide {
+    position: relative;
+    right: auto;
+    /* [1] */
+    left: 66.66667% !important;
+  }
+  .u-pull-2\/3\@wide {
+    position: relative;
+    right: 66.66667% !important;
+    left: auto;
+    /* [1] */
+  }
+  .u-3\/3\@wide {
+    width: 100% !important;
+  }
+  /**
+        * 1. Defensively reset any leftover or conflicting `left`/`right` values.
+        */
+  .u-push-3\/3\@wide {
+    position: relative;
+    right: auto;
+    /* [1] */
+    left: 100% !important;
+  }
+  .u-pull-3\/3\@wide {
+    position: relative;
+    right: 100% !important;
+    left: auto;
+    /* [1] */
+  }
+  .u-1\/4\@wide {
+    width: 25% !important;
+  }
+  /**
+        * 1. Defensively reset any leftover or conflicting `left`/`right` values.
+        */
+  .u-push-1\/4\@wide {
+    position: relative;
+    right: auto;
+    /* [1] */
+    left: 25% !important;
+  }
+  .u-pull-1\/4\@wide {
+    position: relative;
+    right: 25% !important;
+    left: auto;
+    /* [1] */
+  }
+  .u-2\/4\@wide {
+    width: 50% !important;
+  }
+  /**
+        * 1. Defensively reset any leftover or conflicting `left`/`right` values.
+        */
+  .u-push-2\/4\@wide {
+    position: relative;
+    right: auto;
+    /* [1] */
+    left: 50% !important;
+  }
+  .u-pull-2\/4\@wide {
+    position: relative;
+    right: 50% !important;
+    left: auto;
+    /* [1] */
+  }
+  .u-3\/4\@wide {
+    width: 75% !important;
+  }
+  /**
+        * 1. Defensively reset any leftover or conflicting `left`/`right` values.
+        */
+  .u-push-3\/4\@wide {
+    position: relative;
+    right: auto;
+    /* [1] */
+    left: 75% !important;
+  }
+  .u-pull-3\/4\@wide {
+    position: relative;
+    right: 75% !important;
+    left: auto;
+    /* [1] */
+  }
+  .u-4\/4\@wide {
+    width: 100% !important;
+  }
+  /**
+        * 1. Defensively reset any leftover or conflicting `left`/`right` values.
+        */
+  .u-push-4\/4\@wide {
+    position: relative;
+    right: auto;
+    /* [1] */
+    left: 100% !important;
+  }
+  .u-pull-4\/4\@wide {
+    position: relative;
+    right: 100% !important;
+    left: auto;
+    /* [1] */
+  }
+  .u-1\/5\@wide {
+    width: 20% !important;
+  }
+  /**
+        * 1. Defensively reset any leftover or conflicting `left`/`right` values.
+        */
+  .u-push-1\/5\@wide {
+    position: relative;
+    right: auto;
+    /* [1] */
+    left: 20% !important;
+  }
+  .u-pull-1\/5\@wide {
+    position: relative;
+    right: 20% !important;
+    left: auto;
+    /* [1] */
+  }
+  .u-2\/5\@wide {
+    width: 40% !important;
+  }
+  /**
+        * 1. Defensively reset any leftover or conflicting `left`/`right` values.
+        */
+  .u-push-2\/5\@wide {
+    position: relative;
+    right: auto;
+    /* [1] */
+    left: 40% !important;
+  }
+  .u-pull-2\/5\@wide {
+    position: relative;
+    right: 40% !important;
+    left: auto;
+    /* [1] */
+  }
+  .u-3\/5\@wide {
+    width: 60% !important;
+  }
+  /**
+        * 1. Defensively reset any leftover or conflicting `left`/`right` values.
+        */
+  .u-push-3\/5\@wide {
+    position: relative;
+    right: auto;
+    /* [1] */
+    left: 60% !important;
+  }
+  .u-pull-3\/5\@wide {
+    position: relative;
+    right: 60% !important;
+    left: auto;
+    /* [1] */
+  }
+  .u-4\/5\@wide {
+    width: 80% !important;
+  }
+  /**
+        * 1. Defensively reset any leftover or conflicting `left`/`right` values.
+        */
+  .u-push-4\/5\@wide {
+    position: relative;
+    right: auto;
+    /* [1] */
+    left: 80% !important;
+  }
+  .u-pull-4\/5\@wide {
+    position: relative;
+    right: 80% !important;
+    left: auto;
+    /* [1] */
+  }
+  .u-5\/5\@wide {
+    width: 100% !important;
+  }
+  /**
+        * 1. Defensively reset any leftover or conflicting `left`/`right` values.
+        */
+  .u-push-5\/5\@wide {
+    position: relative;
+    right: auto;
+    /* [1] */
+    left: 100% !important;
+  }
+  .u-pull-5\/5\@wide {
+    position: relative;
+    right: 100% !important;
+    left: auto;
+    /* [1] */
+  }
+}
+
 /* ==========================================================================
    #HEADINGS
    ========================================================================== */

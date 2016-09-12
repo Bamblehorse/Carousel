@@ -65,7 +65,7 @@ gulp.task('clean', function () {
 // Watch folders and files for changes
 gulp.task('watch', ['browserSync', 'sass'], function() {
   // Watch Sass
-  gulp.watch('src/scss/**/*.scss', ['clean','sass']);
+  gulp.watch(['src/scss/**/*.scss', 'node_modules/inuit/**/*.scss'], ['clean','sass']);
   // Watch html
   gulp.watch('src/**/*.html', ['refresh']);
   //watch js
