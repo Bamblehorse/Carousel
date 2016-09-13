@@ -542,8 +542,7 @@ table {
 /* stylelint-disable selector-list-comma-newline-after */
 address,
 h1, h2, h3, h4, h5, h6,
-blockquote, p, pre
-dl, ol, ul,
+blockquote, p, pre dl, ol, ul,
 figure,
 hr,
 table,
@@ -1542,22 +1541,64 @@ table {
         Images
     Left and Right Navigation */
 .o-carousel {
-  position: relative;
   overflow: hidden;
-  width: 40%;
-  border: 1px solid #666666;
+  position: relative;
+  width: 75%;
+  height: 40%;
   border-radius: 5px 5px;
+  border: 1px solid #666666;
   background-color: #FFCC00;
 }
 
-.o-carousel__slide {
+.o-carousel__slides {
   list-style: none;
-  margin: auto 0;
   position: relative;
+  padding: 0;
+  margin: 0;
+  width: 300%;
 }
 
-.o-carousel__img {
+.o-carousel__slide li {
+  position: absolute;
+  left: 0;
+  top: 0;
+  text-align: center;
+}
+
+.o-carousel__img, .o-carousel__img--current, .o-carousel__img--next, .o-carousel__img--previous {
   width: 100%;
+  padding: 0;
+  margin: 0;
+  right: 0;
+}
+
+.o-carousel__nav, .o-carousel__nav--left, .o-carousel__nav--right {
+  z-index: 1;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  -webkit-transition-duration: 0.4s;
+  /* Safari */
+  transition-duration: 0.4s;
+  color: black;
+  opacity: 0.1;
+  border-radius: 5px 5px;
+  background-color: #333333;
+  padding: 50% 5% 50% 5%;
+}
+
+.o-carousel__nav:hover, .o-carousel__nav--left:hover, .o-carousel__nav--right:hover {
+  color: white;
+  opacity: 0.7;
+  outline: 0;
+}
+
+.o-carousel__nav--left {
+  left: 0;
+}
+
+.o-carousel__nav--right {
+  right: 0;
 }
 
 /* ==========================================================================
