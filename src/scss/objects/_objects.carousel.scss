@@ -1,0 +1,109 @@
+/*Carousel
+    Unordered List
+      List items
+        Images
+    Left and Right Navigation */
+
+//Block__Element--Modifier
+
+//Edit Carousel Settings here for now
+
+$carousel--width : 80%;
+$slides__total: 4;
+$nav__y--padding: 50%;
+$nav__x--padding: 5%;
+
+@mixin padding-margin($number) {
+  padding: $number;
+  margin: $number;
+}
+
+@mixin border-radius {
+  border-radius: 10px 10px;
+}
+
+@mixin aspect-ratio($ratio-or-width, $height: null) {
+  $padding: if($height, percentage($height/$ratio-or-width), percentage(1/$ratio-or-width));
+  &:before { content:''; float: left; padding-bottom: $padding;  }
+  &:after  { content:''; display: table; clear: both;  }
+}
+
+.o-carousel {
+  margin: auto;
+  overflow: hidden;
+  position: relative;
+  width: $carousel--width;
+  @include border-radius;
+  border: 1px solid #666666;
+  background-color: #FFCC00;
+  @include aspect-ratio(3,2);
+}
+
+.o-carousel__slides {
+  list-style: none;
+
+  width: 100%;
+  position: absolute;
+  @include padding-margin(0);
+}
+
+.o-carousel__slides li {
+  width: 100%;
+  position: absolute;
+
+}
+
+.o-carousel__img {
+  position: absolute;
+  @include padding-margin(0);
+  text-align: center;
+  width: 100%;
+}
+
+.o-carousel__img--current {
+  @extend .o-carousel__img;
+  // z-index: 1;
+}
+
+.o-carousel__img--next {
+  @extend .o-carousel__img;
+}
+
+.o-carousel__img--previous {
+  @extend .o-carousel__img;
+}
+
+.o-carousel__nav {
+  z-index: 2;
+  position: absolute;
+
+  top: 50%;
+  transform: translateY(-50%);
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+
+  color: black;
+  opacity: 0.1;
+  @include border-radius;
+  background-color: #333333;
+  padding: $nav__y--padding $nav__x--padding
+           $nav__y--padding $nav__x--padding;
+}
+
+.o-carousel__nav:hover {
+  color: white;
+  opacity: 0.7;
+  outline: 0;
+}
+
+.o-carousel__nav--left {
+  @extend .o-carousel__nav;
+  left: 0;
+}
+
+.o-carousel__nav--right {
+  @extend .o-carousel__nav;
+  right: 0;
+}
+
+

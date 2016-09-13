@@ -1541,39 +1541,50 @@ table {
         Images
     Left and Right Navigation */
 .o-carousel {
+  margin: auto;
   overflow: hidden;
   position: relative;
-  width: 75%;
-  height: 40%;
-  border-radius: 5px 5px;
+  width: 80%;
+  border-radius: 10px 10px;
   border: 1px solid #666666;
   background-color: #FFCC00;
 }
 
-.o-carousel__slides {
-  list-style: none;
-  position: relative;
-  padding: 0;
-  margin: 0;
-  width: 300%;
+.o-carousel:before {
+  content: '';
+  float: left;
+  padding-bottom: 66.66667%;
 }
 
-.o-carousel__slide li {
+.o-carousel:after {
+  content: '';
+  display: table;
+  clear: both;
+}
+
+.o-carousel__slides {
+  list-style: none;
+  width: 100%;
   position: absolute;
-  left: 0;
-  top: 0;
-  text-align: center;
+  padding: 0;
+  margin: 0;
+}
+
+.o-carousel__slides li {
+  width: 100%;
+  position: absolute;
 }
 
 .o-carousel__img, .o-carousel__img--current, .o-carousel__img--next, .o-carousel__img--previous {
-  width: 100%;
+  position: absolute;
   padding: 0;
   margin: 0;
-  right: 0;
+  text-align: center;
+  width: 100%;
 }
 
 .o-carousel__nav, .o-carousel__nav--left, .o-carousel__nav--right {
-  z-index: 1;
+  z-index: 2;
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -1582,7 +1593,7 @@ table {
   transition-duration: 0.4s;
   color: black;
   opacity: 0.1;
-  border-radius: 5px 5px;
+  border-radius: 10px 10px;
   background-color: #333333;
   padding: 50% 5% 50% 5%;
 }
