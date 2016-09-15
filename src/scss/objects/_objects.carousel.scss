@@ -39,30 +39,69 @@ $nav__x--padding: 5%;
   @include aspect-ratio(3,2);
 }
 
-.o-carousel__slides {
-  list-style: none;
+  @mixin centered {
+    left: 50%;
+    z-index: 1;
+    position: absolute;
+    transform: translateX(-50%);
+  }
 
+#o-carousel__title {
+  top: 5%;
+  font-size: 5vw;
+  @include centered;
+  z-index: 2;
+}
+
+#o-carousel__dots {
+  bottom: 5%;;
+  color: black;
+  list-style: disc;
+  @include centered;
+}
+
+#o-carousel__dots li{
+  float: left;
+  width:1vw;
+  height:1vw;
+  font-size: 4vw;
+  padding-right: 20px;
+  display: list-item;
+}
+#o-carousel__dots li:hover{
+  color: black;
+  opacity: 0.1;
+}
+
+#o-carousel__dots #current{
+  color: white;
+}
+
+.o-carousel__slides {
+  top:-5%; // Vertical align
   width: 100%;
+  list-style: none;
   position: absolute;
   @include padding-margin(0);
 }
 
 .o-carousel__slides li {
+  top:0;
   width: 100%;
   position: absolute;
-
 }
-
 .o-carousel__img {
   position: absolute;
   @include padding-margin(0);
-  text-align: center;
+
+  top:0;
+  left:0;
   width: 100%;
 }
 
 .o-carousel__img--current {
   @extend .o-carousel__img;
-  // z-index: 1;
+  z-index: 1;
 }
 
 .o-carousel__img--next {
