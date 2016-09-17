@@ -16,6 +16,7 @@
     "gulp-plumber": "^1.1.0",
     "gulp-sass": "^2.3.2",
     "gulp-watch": "^4.3.9",
-    "inuitcss": "^6.0.0-beta.3"
+    "inuitcss": "^6.0.0-beta.3",
+    "jquery": "^3.1.0"
   }
 }

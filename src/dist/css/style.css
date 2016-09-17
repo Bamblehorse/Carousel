@@ -1544,8 +1544,8 @@ table {
   margin: auto;
   overflow: hidden;
   position: relative;
-  width: 80%;
   border-radius: 10px 10px;
+  width: 80%;
   border: 1px solid #666666;
   background-color: #FFCC00;
 }
@@ -1564,44 +1564,50 @@ table {
 
 #o-carousel__title {
   top: 5%;
+  z-index: 2;
   font-size: 5vw;
   left: 50%;
   z-index: 1;
   position: absolute;
   transform: translateX(-50%);
-  z-index: 2;
 }
 
 #o-carousel__dots {
-  bottom: 5%;
-  color: black;
-  list-style: disc;
-  left: 50%;
-  z-index: 1;
+  right: 50%;
+  bottom: 2.5%;
+  list-style: none;
   position: absolute;
-  transform: translateX(-50%);
+  text-align: center;
+  transform: translateX(50%);
 }
 
 #o-carousel__dots li {
+  width: 2vw;
+  height: 2vw;
   float: left;
-  width: 1vw;
-  height: 1vw;
-  font-size: 4vw;
-  padding-right: 20px;
-  display: list-item;
+  opacity: 0.4;
+  margin-left: 0.5vw;
+  margin-right: 0.5vw;
+  border-radius: 100%;
+  display: inline-block;
+  border: solid black 1px;
+  background-color: white;
+  transition-duration: 0.3s;
 }
 
 #o-carousel__dots li:hover {
-  color: black;
-  opacity: 0.1;
+  opacity: 0.8;
+  cursor: pointer;
+  transform: scale(1.1, 1.1);
+  box-shadow: 2px 2px 2px 0px gray;
 }
 
 #o-carousel__dots #current {
-  color: white;
+  background-color: black;
 }
 
 .o-carousel__slides {
-  top: -5%;
+  top: -5.5%;
   width: 100%;
   list-style: none;
   position: absolute;
@@ -1612,16 +1618,14 @@ table {
 .o-carousel__slides li {
   top: 0;
   width: 100%;
-  position: absolute;
 }
 
 .o-carousel__img, .o-carousel__img--current, .o-carousel__img--next, .o-carousel__img--previous {
-  position: absolute;
-  padding: 0;
-  margin: 0;
   top: 0;
   left: 0;
   width: 100%;
+  padding: 0;
+  margin: 0;
 }
 
 .o-carousel__img--current {
@@ -1629,24 +1633,25 @@ table {
 }
 
 .o-carousel__nav, .o-carousel__nav--left, .o-carousel__nav--right {
-  z-index: 2;
-  position: absolute;
   top: 50%;
+  z-index: 2;
+  color: black;
+  opacity: 0.1;
+  position: absolute;
+  border-radius: 10px 10px;
+  background-color: #333333;
+  transition-duration: 0.4s;
   transform: translateY(-50%);
   -webkit-transition-duration: 0.4s;
   /* Safari */
-  transition-duration: 0.4s;
-  color: black;
-  opacity: 0.1;
-  border-radius: 10px 10px;
-  background-color: #333333;
   padding: 50% 5% 50% 5%;
 }
 
 .o-carousel__nav:hover, .o-carousel__nav--left:hover, .o-carousel__nav--right:hover {
+  outline: 0;
   color: white;
   opacity: 0.7;
-  outline: 0;
+  cursor: pointer;
 }
 
 .o-carousel__nav--left {

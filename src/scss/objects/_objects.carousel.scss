@@ -32,53 +32,62 @@ $nav__x--padding: 5%;
   margin: auto;
   overflow: hidden;
   position: relative;
-  width: $carousel--width;
   @include border-radius;
+  width: $carousel--width;
   border: 1px solid #666666;
   background-color: #FFCC00;
   @include aspect-ratio(3,2);
 }
 
-  @mixin centered {
-    left: 50%;
-    z-index: 1;
-    position: absolute;
-    transform: translateX(-50%);
-  }
+@mixin centered {
+  left: 50%;
+  z-index: 1;
+  position: absolute;
+  transform: translateX(-50%);
+}
 
 #o-carousel__title {
   top: 5%;
+  z-index: 2;
   font-size: 5vw;
   @include centered;
-  z-index: 2;
 }
 
 #o-carousel__dots {
-  bottom: 5%;;
-  color: black;
-  list-style: disc;
-  @include centered;
+  right: 50%;
+  bottom: 2.5%;
+  list-style: none;
+  position: absolute;
+  text-align: center;
+  transform: translateX(50%);
 }
 
 #o-carousel__dots li{
+  width:2vw;
+  height:2vw;
   float: left;
-  width:1vw;
-  height:1vw;
-  font-size: 4vw;
-  padding-right: 20px;
-  display: list-item;
+  opacity: 0.4;
+  margin-left: 0.5vw;
+  margin-right: 0.5vw;
+  border-radius: 100%;
+  display: inline-block;
+  border: solid black 1px;
+  background-color: white;
+  transition-duration: 0.3s;
 }
 #o-carousel__dots li:hover{
-  color: black;
-  opacity: 0.1;
+  opacity: 0.8;
+  cursor: pointer;
+  transform: scale(1.1,1.1);
+  box-shadow: 2px 2px 2px 0px gray;
 }
 
 #o-carousel__dots #current{
-  color: white;
+  background-color: black;
 }
 
 .o-carousel__slides {
-  top:-5%; // Vertical align
+  top: -5.5%; // Vertical align
   width: 100%;
   list-style: none;
   position: absolute;
@@ -88,20 +97,17 @@ $nav__x--padding: 5%;
 .o-carousel__slides li {
   top:0;
   width: 100%;
-  position: absolute;
 }
 .o-carousel__img {
-  position: absolute;
-  @include padding-margin(0);
-
   top:0;
   left:0;
   width: 100%;
+  @include padding-margin(0);
 }
 
 .o-carousel__img--current {
-  @extend .o-carousel__img;
   z-index: 1;
+  @extend .o-carousel__img;
 }
 
 .o-carousel__img--next {
@@ -113,36 +119,35 @@ $nav__x--padding: 5%;
 }
 
 .o-carousel__nav {
-  z-index: 2;
-  position: absolute;
-
   top: 50%;
-  transform: translateY(-50%);
-  -webkit-transition-duration: 0.4s; /* Safari */
-  transition-duration: 0.4s;
-
+  z-index: 2;
   color: black;
   opacity: 0.1;
+  position: absolute;
   @include border-radius;
   background-color: #333333;
+  transition-duration: 0.4s;
+  transform: translateY(-50%);
+  -webkit-transition-duration: 0.4s; /* Safari */
   padding: $nav__y--padding $nav__x--padding
            $nav__y--padding $nav__x--padding;
 }
 
 .o-carousel__nav:hover {
+  outline: 0;
   color: white;
   opacity: 0.7;
-  outline: 0;
+  cursor: pointer;
 }
 
 .o-carousel__nav--left {
-  @extend .o-carousel__nav;
   left: 0;
+  @extend .o-carousel__nav;
 }
 
 .o-carousel__nav--right {
-  @extend .o-carousel__nav;
   right: 0;
+  @extend .o-carousel__nav;
 }
 
 
