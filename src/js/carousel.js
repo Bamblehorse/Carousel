@@ -94,7 +94,7 @@ $(document).ready(function(){
   });
 
   // Nav dot clicked
-  dots.click(function(event) {
+  dot.click(function(event) {
     var current_dot = $(".current");
     var selected_dot = $(event.target);
     if (selected_dot.hasClass('current') ||
