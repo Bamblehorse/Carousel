@@ -6,11 +6,10 @@
 
 //Block__Element--Modifier
 
-//Edit Carousel Settings here for now
-
+//Edit Carousel Settings here
 $carousel--width : 80%;
 $slides__total: 4;
-$nav__y--padding: 50%;
+$nav__y--padding: 25vw;
 $nav__x--padding: 5%;
 
 @mixin padding-margin($number) {
@@ -35,7 +34,6 @@ $nav__x--padding: 5%;
   @include border-radius;
   width: $carousel--width;
   border: 1px solid #666666;
-  background-color: #FFCC00;
   @include aspect-ratio(3,2);
 }
 
@@ -53,16 +51,26 @@ $nav__x--padding: 5%;
   @include centered;
 }
 
-#o-carousel__dots {
+#o-carousel__slide-indicator {
+  bottom: 0;
+  z-index: 1;
+  position: absolute;
+  padding: 1% 1% 1% 1%;
+  border: solid gray 1px;
+  font-size: 2vw;
+  left: $nav__x--padding + 8%;
+}
+
+.o-carousel__dots {
   right: 50%;
-  bottom: 2.5%;
+  bottom: -2.5%;
   list-style: none;
   position: absolute;
   text-align: center;
   transform: translateX(50%);
 }
 
-#o-carousel__dots li{
+.o-carousel__dots li{
   width:2vw;
   height:2vw;
   float: left;
@@ -75,14 +83,14 @@ $nav__x--padding: 5%;
   background-color: white;
   transition-duration: 0.3s;
 }
-#o-carousel__dots li:hover{
+.o-carousel__dots li:hover{
   opacity: 0.8;
   cursor: pointer;
   transform: scale(1.1,1.1);
-  box-shadow: 2px 2px 2px 0px gray;
+  // box-shadow: 1px 1px 1px 0px gray;
 }
 
-#o-carousel__dots #current{
+.o-carousel__dots .current{
   background-color: black;
 }
 
@@ -105,9 +113,7 @@ $nav__x--padding: 5%;
   @include padding-margin(0);
 }
 
-.o-carousel__img--current {
-  z-index: 1;
-  @extend .o-carousel__img;
+.selected {
 }
 
 .o-carousel__img--next {
@@ -120,9 +126,10 @@ $nav__x--padding: 5%;
 
 .o-carousel__nav {
   top: 50%;
-  z-index: 2;
+  z-index: 1;
   color: black;
   opacity: 0.1;
+  font-size: 4vw;
   position: absolute;
   @include border-radius;
   background-color: #333333;
@@ -141,12 +148,12 @@ $nav__x--padding: 5%;
 }
 
 .o-carousel__nav--left {
-  left: 0;
+  left: -2;
   @extend .o-carousel__nav;
 }
 
 .o-carousel__nav--right {
-  right: 0;
+  right: -2;
   @extend .o-carousel__nav;
 }
 
