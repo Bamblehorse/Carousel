@@ -2,7 +2,7 @@
 This project is a Carousel.
 
 View here:
-* [Carousel - work in progress - 10/09/2016](https://jonathandwood.github.io/Carousel/src/)
+* [Carousel - working prototype - 27/09/2016](https://jonathandwood.github.io/Carousel/dist/)
 
 It's purpose is to display technical skill in HTML, CSS and Javascript.
 
