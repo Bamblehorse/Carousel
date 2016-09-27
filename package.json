@@ -22,6 +22,7 @@
     "gulp-useref": "^3.1.2",
     "gulp-watch": "^4.3.9",
     "inuitcss": "^6.0.0-beta.3",
-    "jquery": "^3.1.0"
+    "jquery": "^3.1.0",
+    "run-sequence": "^1.2.2"
   }
 }
