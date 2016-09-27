@@ -26,7 +26,7 @@ console.log('start of file');
                 // UL of dot indicators
                 dots : $(".o-carousel__dots")
             };
-
+            // Secondary variables rely on plugin.variables to work
             plugin.secondaryVariables = {
                 // Number of images
                 amount_of_slides : plugin.variables.slides.length,
@@ -38,7 +38,10 @@ console.log('start of file');
 
             // Plugin default settings
             plugin.defaults = {
-                hello: 'moo'
+                showDots : false,
+                showIndicator: false,
+                animation: 'basic',
+                theme: 'dark'
             };
 
             variables = $.extend({}, plugin.variables, plugin.secondaryVariables, variables);
@@ -47,11 +50,14 @@ console.log('start of file');
             console.log(variables);
             console.log('settings:')
             console.log(settings)
-            variables.dots.hide();
-            variables.indicator.hide();
             // Plugin Functions
             s = settings;
             v = variables;
+
+            // Check for user creating their own settings
+            s.showDots ? v.dots.show() : v.dots.hide();
+            s.showIndicator ? v.indicator.show() : v.indicator.hide();
+
             f={ // functions
                 getCurrentSlide: function() {
                   return $(v.slides[v.slide_number]);
@@ -153,10 +159,13 @@ console.log('start of file');
 })(jQuery, window, document);
 
 $(document).ready(function() {
+  var carousel__settings = {
+    showDots : true,
+    showIndicator: true
 
-    $(".o-carousel")
-    .merryGoSlide();
+  };
+  $(".o-carousel")
+  .merryGoSlide(carousel__settings);
 
 console.log('end of file');
-
 });
