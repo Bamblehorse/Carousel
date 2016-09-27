@@ -1,29 +1,35 @@
 "use strict";
 
 // Required packages
-var gulp = require('gulp');
-var notify = require('gulp-notify');
-var watch = require('gulp-watch');
-var sass = require('gulp-sass');
-var del = require('del');
-var plumber = require('gulp-plumber');
-var browserSync = require('browser-sync').create();
+var gulp = require('gulp'),
+    notify = require('gulp-notify'),
+    watch = require('gulp-watch'),
+    sass = require('gulp-sass'),
+    useref = require('gulp-useref'),
+    cssnano = require('gulp-cssnano'),
+    uglify = require('gulp-uglify'),
+    imagemin = require('gulp-imagemin'),
+    cache = require('gulp-cache'),
+    gulpIf = require('gulp-if'),
+    del = require('del'),
+    plumber = require('gulp-plumber'),
+    browserSync = require('browser-sync').create();
 
 //Default Gulp Task
-gulp.task('default', ['watch']);
+gulp.task('default', ['images', 'watch','browserSync', 'sass', 'useref']);
 
 // Loads local server
 gulp.task('browserSync', function() {
   browserSync.init({
     server: {
-      baseDir: 'src'
+      baseDir: 'dist'
     },
   })
 });
 
 // Sass Variables
 var sassFolder = 'src/scss/**/*.scss';
-var cssFolder = 'src/dist/css';
+var cssFolder = 'src/css/';
 var sassStyle = {
   outputStyle: 'expanded'
 };
@@ -55,19 +61,32 @@ gulp.task('refresh', function() {
     .pipe(notify({message: 'Changes Detected, Server Reloaded'}))
   });
 
-// Clean CSS folders ready for compiling SASS
-gulp.task('clean', function () {
-    return del([
-      'src/css/**/*'
-      ]);
+gulp.task('cleanCSS', function() {
+  del(['src/css/**/*']);
+});
+
+gulp.task('images', function(){
+  return gulp.src('src/img/**/*.+(png|jpg|gif|svg)')
+    .pipe(cache(imagemin()))
+    .pipe(gulp.dest('dist/img'))
+});
+
+gulp.task('useref', function(){
+  del(['dist/js/**/*']);
+  del(['dist/**/*.html']);
+  return gulp.src('src/*.html')
+    .pipe(useref())
+    .pipe(gulpIf('*.js', uglify()))
+    .pipe(gulpIf('*.css', cssnano()))
+    .pipe(gulp.dest('dist'))
 });
 
 // Watch folders and files for changes
-gulp.task('watch', ['browserSync', 'sass'], function() {
+gulp.task('watch', function() {
   // Watch Sass
-  gulp.watch(['src/scss/**/*.scss'], ['clean','sass']);
+  gulp.watch(['src/scss/**/*.scss'], ['cleanCSS', 'sass']);
   // Watch html
   gulp.watch('src/**/*.html', ['refresh']);
   //watch js
-  gulp.watch('app/js/**/*.js', ['refresh']);
+  gulp.watch('src/js/**/*.js', ['refresh']);
 });
