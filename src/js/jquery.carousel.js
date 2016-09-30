@@ -40,7 +40,7 @@ console.log('start of file');
             plugin.defaults = {
                 showDots : false,
                 showIndicator: false,
-                animation: 'basic',
+                transition: 'basic',
                 theme: 'dark'
             };
 
@@ -72,50 +72,62 @@ console.log('start of file');
                 changeSlide: function(direction) {
                   console.log("## Changing Slides ##");
                   console.log("starting on slide: " + v.slide_number);
-                  v.current_slide.hide();
 
                   if ((direction == "right") && (v.slide_number < v.amount_of_slides -1)) {
-                    v.current_slide.removeClass('selected');
                     v.slide_number += 1;
-                    f.getTitle();
-                    v.current_slide.addClass('selected');
                   }
                   else if ((direction == "left") && (v.slide_number > 0)) {
-                    v.current_slide.removeClass('selected');
                     v.slide_number -= 1;
-                    f.getTitle();
-                    v.current_slide.addClass('selected');
                   }
                   else if ((direction == "right") && (v.slide_number == v.amount_of_slides - 1)) {
                     console.log('-- gone too far right --');
-                    v.current_slide.removeClass('selected');
                     v.slide_number = 0;
-                    f.getTitle();
-                    v.current_slide.addClass('selected');
                   }
                   else if ((direction == "left") &&(v.slide_number == 0)) {
                     console.log('-- gone too far left --');
-                    v.current_slide.removeClass('selected');
                     v.slide_number = v.amount_of_slides -1 ;
-                    f.getTitle();
-                    v.current_slide.addClass('selected');
                   }
                   else if (direction == "none") {
                     console.log('clicked on dot:' + v.slide_number);
-                    v.current_slide.removeClass('selected');
-                    f.getTitle();
-                    v.current_slide.addClass('selected');
                   };
+                  v.next_slide = $(v.slides[v.slide_number]);
+                  f.transition('start', direction);
+                  v.current_slide.removeClass('selected');
+                  f.getTitle();
+                  v.current_slide.addClass('selected');
                   console.log("finishing on slide: " + v.slide_number);
                   console.log('');
-                  v.current_slide.show();
+                  f.transition('finish', direction);
                   f.changeDots();
+                  console.log(v.current_slide)
                 },
 
                 changeDots: function() {
                   $(".current").removeClass('current');
                   v.dot.eq(v.slide_number).addClass('current');
+                },
+
+                transition: function(stage, direction) {
+                  switch (s.transition) {
+                    case 'basic':
+                      stage == 'start' ? v.current_slide.hide() : v.current_slide.show();
+                      break;
+                    case 'vertical':
+                      stage == 'start' ? v.current_slide.slideUp(600) : v.current_slide.slideDown(600);
+                      break;
+                    case 'slide':
+                      (stage == 'start' && direction == 'right') ?
+                      (v.current_slide.show().animate({marginLeft: '-=100%'}, 600, function(){v.current_slide.hide()})
+                                             .animate({marginLeft: '+=100%'}, 0)
+                      )
+                           : (v.current_slide.animate({marginLeft: '+=100%'}, 0).animate({marginLeft: '-=100%'}, 600))
+                      break;
+                    case 'fade':
+                      stage == 'start' ? v.current_slide.fadeOut('slow') : v.current_slide.show();
+                      break;
+                  };
                 }
+
             };
               // Left nav button clicked
               v.left.click(function(event) {
@@ -147,7 +159,6 @@ console.log('start of file');
             v.current_slide.addClass('selected');
             v.dot.eq(0).addClass('current');
             f.changeDots();
-
             return $(plugin).each(function() {
 
                 // Plugin logic
@@ -159,9 +170,11 @@ console.log('start of file');
 })(jQuery, window, document);
 
 $(document).ready(function() {
+  // User passes in their settings here
   var carousel__settings = {
-    showDots : true,
-    showIndicator: true
+    showDots: true,
+    showIndicator: true,
+    transition: 'fade'
 
   };
   $(".o-carousel")
