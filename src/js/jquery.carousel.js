@@ -1,184 +1,239 @@
 ;(function($, window, document, undefined) {
 
-console.log('start of file');
+  "use strict";
 
-    'use strict';
+  $.fn.extend({
+    // Usage:
+    // jQuery(selector).pluginName({property:'value'});
+    merryGoSlide: function(settings) {
+      // assigned 'this' to plugin
+      var plugin = this;
+      // Title of each Slide - from alt tag of image
+      var titles = $(".o-carousel__slides h1"),
+        // Box showing "slide X of Y"
+        indicator = $("#o-carousel__slide-indicator"),
+        // Left amd right navigation buttons
+        buttonLeft = $(".o-carousel__nav--left"),
+        buttonRight = $(".o-carousel__nav--right"),
+        // Collection of all carousel images
+        slides = $(".o-carousel__slides").find("img"),
+        // Default setting - display first image on start
+        slideNumber = 0,
+        // UL of dot indicators
+        dots = $(".o-carousel__dots"),
+        // Number of images
+        amountOfSlides = slides.length,
+        // Selects the current slide from collection of slides
+        currentSlide = $(slides[slideNumber]),
+        // Collection of dot indicators
+        dot = dots.find("li"),
+        // How far to offset slides when sliding horizontally
+        marginOffset = 0,
+        // The slide after current one
+        nextSlide = $(slides[slideNumber + 1]);
+      // console.log(titles[slideNumber].prop('hidden', true))
+      // titles[slideNumber].css(opacity,1);
 
-    $.fn.extend({
-        // Usage:
-        // jQuery(selector).pluginName({property:'value'});
-        merryGoSlide : function(settings, variables) {
-            // assigned 'this' to plugin
-            plugin = this;
-            // Carousel Element variables
-            plugin.variables = {
-                // Title of each Slide - from alt tag of image
-                title : $("#o-carousel__title"),
-                // Box showing "slide X of Y"
-                indicator : $("#o-carousel__slide-indicator"),
-                // Left amd right navigation buttons
-                left : $(".o-carousel__nav--left"),
-                right : $(".o-carousel__nav--right"),
-                // Collection of all carousel images
-                slides : $(".o-carousel__slides").find("img"),
-                // Default setting - display first image on start
-                slide_number : 0,
-                // UL of dot indicators
-                dots : $(".o-carousel__dots")
-            };
-            // Secondary variables rely on plugin.variables to work
-            plugin.secondaryVariables = {
-                // Number of images
-                amount_of_slides : plugin.variables.slides.length,
-                // Selects the current slide from collection of slides
-                current_slide : $(plugin.variables.slides[plugin.variables.slide_number]),
-                // Collection of dot indicators
-                dot : plugin.variables.dots.find("li")
-            };
+      // Plugin default settings
+      plugin.defaults = {
+        loop: false,
+        theme: "dark",
+        showDots: false,
+        autoScroll: false,
+        transition: "basic",
+        scrollSpeed: 4000,
+        showIndicator: false,
+        transitionSpeed: 1000
+      };
 
-            // Plugin default settings
-            plugin.defaults = {
-                showDots : false,
-                showIndicator: false,
-                transition: 'basic',
-                theme: 'dark'
-            };
+      settings = $.extend({}, plugin.defaults, settings);
 
-            variables = $.extend({}, plugin.variables, plugin.secondaryVariables, variables);
-            settings = $.extend({}, plugin.defaults, settings);
-            console.log('variables:');
-            console.log(variables);
-            console.log('settings:')
-            console.log(settings)
-            // Plugin Functions
-            s = settings;
-            v = variables;
+      // Check for user creating their own settings
+      if (settings.showDots) {
+        dots.show();
+      } else {
+        dots.hide();
+      }
 
-            // Check for user creating their own settings
-            s.showDots ? v.dots.show() : v.dots.hide();
-            s.showIndicator ? v.indicator.show() : v.indicator.hide();
+      if (settings.showIndicator) {
+        indicator.show();
+      } else {
+        indicator.hide();
+      }
 
-            f={ // functions
-                getCurrentSlide: function() {
-                  return $(v.slides[v.slide_number]);
-                },
+      if (settings.autoScroll) {
+        setInterval(function() {
+          changeSlide("right");
+        }, settings.scrollSpeed, "linear");
+      }
 
-                getTitle: function() {
-                  v.current_slide = f.getCurrentSlide();
-                  v.title.text(v.current_slide[0].alt);
-                  v.indicator.text((v.slide_number + 1) + " of " + v.amount_of_slides);
-                },
+      function getCurrentSlide() {
+        return $(slides[slideNumber]);
+      }
 
-                changeSlide: function(direction) {
-                  console.log("## Changing Slides ##");
-                  console.log("starting on slide: " + v.slide_number);
+      function getTitle() {
+        currentSlide = getCurrentSlide();
+        titles.fadeOut(settings.transitionSpeed);
+        indicator.text((slideNumber + 1) + " of " + amountOfSlides);
+      }
 
-                  if ((direction == "right") && (v.slide_number < v.amount_of_slides -1)) {
-                    v.slide_number += 1;
-                  }
-                  else if ((direction == "left") && (v.slide_number > 0)) {
-                    v.slide_number -= 1;
-                  }
-                  else if ((direction == "right") && (v.slide_number == v.amount_of_slides - 1)) {
-                    console.log('-- gone too far right --');
-                    v.slide_number = 0;
-                  }
-                  else if ((direction == "left") &&(v.slide_number == 0)) {
-                    console.log('-- gone too far left --');
-                    v.slide_number = v.amount_of_slides -1 ;
-                  }
-                  else if (direction == "none") {
-                    console.log('clicked on dot:' + v.slide_number);
-                  };
-                  v.next_slide = $(v.slides[v.slide_number]);
-                  f.transition('start', direction);
-                  v.current_slide.removeClass('selected');
-                  f.getTitle();
-                  v.current_slide.addClass('selected');
-                  console.log("finishing on slide: " + v.slide_number);
-                  console.log('');
-                  f.transition('finish', direction);
-                  f.changeDots();
-                  console.log(v.current_slide)
-                },
-
-                changeDots: function() {
-                  $(".current").removeClass('current');
-                  v.dot.eq(v.slide_number).addClass('current');
-                },
-
-                transition: function(stage, direction) {
-                  switch (s.transition) {
-                    case 'basic':
-                      stage == 'start' ? v.current_slide.hide() : v.current_slide.show();
-                      break;
-                    case 'vertical':
-                      stage == 'start' ? v.current_slide.slideUp(600) : v.current_slide.slideDown(600);
-                      break;
-                    case 'slide':
-                      (stage == 'start' && direction == 'right') ?
-                      (v.current_slide.show().animate({marginLeft: '-=100%'}, 600, function(){v.current_slide.hide()})
-                                             .animate({marginLeft: '+=100%'}, 0)
-                      )
-                           : (v.current_slide.animate({marginLeft: '+=100%'}, 0).animate({marginLeft: '-=100%'}, 600))
-                      break;
-                    case 'fade':
-                      stage == 'start' ? v.current_slide.fadeOut('slow') : v.current_slide.show();
-                      break;
-                  };
-                }
-
-            };
-              // Left nav button clicked
-              v.left.click(function(event) {
-                f.changeSlide("left");
-              });
-
-              // Right nav button clicked
-              v.right.click(function(event) {
-                f.changeSlide("right");
-              });
-
-              // Nav dot clicked
-              v.dot.click(function(event) {
-                var current_dot = $(".current");
-                var selected_dot = $(event.target);
-                if (selected_dot.hasClass('current') ||
-                    selected_dot.hasClass('o-carousel__dots')) {
-                }
-                else{
-                  selected_dot.addClass('current');
-                  current_dot.removeClass('current');
-                };
-                v.slide_number = selected_dot.index();
-                f.changeSlide("none");
-              });
-
-            // Run on plugin creation
-            f.getTitle();
-            v.current_slide.addClass('selected');
-            v.dot.eq(0).addClass('current');
-            f.changeDots();
-            return $(plugin).each(function() {
-
-                // Plugin logic
-                // Calling the function:
-                // jQuery(selector).pluginName(options);
-            });
+      function changeSlide(direction) {
+        buttonLeft.css({
+          "pointer-events": "auto"
+        }).show();
+        buttonRight.css({
+          "pointer-events": "auto"
+        }).show();
+        // Change slides in loop
+        if ((direction == "right") && (slideNumber < amountOfSlides - 1)) {
+          slideNumber += 1;
+        } else if ((direction == "left") && (slideNumber > 0)) {
+          slideNumber -= 1;
+        } else if ((direction == "right") && (slideNumber == amountOfSlides - 1)) {
+          slideNumber = 0;
+        } else if ((direction == "left") && (slideNumber === 0)) {
+          slideNumber = amountOfSlides - 1;
+          // } else if (direction == "none")
         }
-    });
+        // Add and remove selected class, get title and transition
+        transition("start", direction);
+        currentSlide.removeClass("selected");
+        getTitle();
+        currentSlide.addClass("selected");
+        transition("finish", direction);
+        changeDots();
+        // Check for user not wanting a loop
+        if ((direction == "right" || direction == "none") && (slideNumber == amountOfSlides - 1) && !settings.loop) {
+          buttonRight.css({
+            "pointer-events": "none"
+          }).hide();
+        } else if ((direction == "left" || direction == "none") && (slideNumber === 0) && !settings.loop) {
+          buttonLeft.css({
+            "pointer-events": "none"
+          }).hide();
+        }
+      }
+
+      function changeDots() {
+        $(".current").removeClass("current");
+        dot.eq(slideNumber).addClass("current");
+      }
+
+      function transition(stage, direction) {
+        switch (settings.transition) {
+          case "basic":
+            if (stage == "start") {
+              currentSlide.css({
+                opacity: 0
+              });
+            } else {
+              titles.eq(slideNumber).fadeIn(settings.transitionSpeed / 2);
+              currentSlide.css({
+                opacity: 1
+              });
+            }
+            break;
+          case "slide":
+            $(".o-carousel__slides li").css({
+              position: "relative"
+            });
+            slides.css({
+              opacity: 1
+            });
+            switch (stage) {
+              case "start":
+                marginOffset = slideNumber * -100 + "%";
+                slides.animate({
+                  marginLeft: marginOffset
+                }, settings.transitionSpeed, "linear");
+                titles.eq(slideNumber).slideUp(settings.transitionSpeed);
+                break;
+              case "finish":
+                titles.eq(slideNumber).show().animate({marginTop: "-=100%", marginLeft: marginOffset}, 0)
+                .animate({
+                  marginTop: "+=100%"
+                }, settings.transitionSpeed, "linear");
+                break;
+            }
+            break;
+          case "fade":
+            if (stage == "start") {
+              currentSlide.animate({
+                opacity: 0
+              }, settings.transitionSpeed);
+            } else {
+              titles.eq(slideNumber).fadeIn(settings.transitionSpeed);
+              currentSlide.animate({
+                opacity: 1
+              }, settings.transitionSpeed);
+            }
+            break;
+        }
+      }
+      // Left nav button clicked
+      buttonLeft.click(function(event) {
+        changeSlide("left");
+      });
+
+      // Right nav button clicked
+      buttonRight.click(function(event) {
+        changeSlide("right");
+      });
+
+      // Nav dot clicked
+      dot.click(function(event) {
+        var currentDot = $(".current");
+        var selectedDot = $(event.target);
+        if (selectedDot.hasClass("current") ||
+          selectedDot.hasClass("o-carousel__dots")) {} else {
+          selectedDot.addClass("current");
+          currentDot.removeClass("current");
+        }
+        slideNumber = selectedDot.index();
+        changeSlide("none");
+      });
+
+      // Run on plugin creation
+      titles.hide();
+      getTitle();
+      titles.eq(slideNumber).fadeIn(settings.transitionSpeed);
+      slides.css({
+        opacity: 0
+      });
+      currentSlide.css({
+        opacity: 1,
+        "z-index": 1
+      }).addClass("selected");
+      dot.eq(0).addClass("current");
+      changeDots();
+      if (settings.loop) {
+        buttonLeft.show();
+      } else {
+        buttonLeft.css({
+          "pointer-events": "none"
+        }).hide();
+      }
+      return $(plugin).each(function() {
+
+        // Plugin logic
+        // Calling the function:
+        // jQuery(selector).pluginName(options);
+      });
+    }
+  });
 })(jQuery, window, document);
 
 $(document).ready(function() {
   // User passes in their settings here
-  var carousel__settings = {
+  var carouselSettings = {
     showDots: true,
     showIndicator: true,
-    transition: 'fade'
+    transition: "slide",
+    loop: false,
+    autoScroll: false,
+    transitionSpeed: 1000
 
   };
   $(".o-carousel")
-  .merryGoSlide(carousel__settings);
-
-console.log('end of file');
+    .merryGoSlide(carouselSettings);
 });
