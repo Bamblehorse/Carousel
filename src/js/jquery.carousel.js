@@ -30,9 +30,9 @@
         // How far to offset slides when sliding horizontally
         marginOffset = 0,
         // The slide after current one
-        nextSlide = $(slides[slideNumber + 1]);
-      // console.log(titles[slideNumber].prop('hidden', true))
-      // titles[slideNumber].css(opacity,1);
+        nextSlide = $(slides[slideNumber + 1]),
+        // Set a variable for autoscrolling
+        scroll;
 
       // Plugin default settings
       plugin.defaults = {
@@ -62,7 +62,7 @@
       }
 
       if (settings.autoScroll) {
-        setInterval(function() {
+        scroll = setInterval(function() {
           changeSlide("right");
         }, settings.scrollSpeed, "linear");
       }
@@ -90,10 +90,25 @@
         } else if ((direction == "left") && (slideNumber > 0)) {
           slideNumber -= 1;
         } else if ((direction == "right") && (slideNumber == amountOfSlides - 1)) {
-          slideNumber = 0;
+            if (settings.autoScroll && !settings.loop) {
+              clearInterval(scroll);
+              changeSlide("left");
+              scroll = setInterval(function() {
+                changeSlide("left");
+            }, settings.scrollSpeed, "linear");
+            } else {
+              slideNumber = 0;
+          }
         } else if ((direction == "left") && (slideNumber === 0)) {
-          slideNumber = amountOfSlides - 1;
-          // } else if (direction == "none")
+            if (settings.autoScroll && !settings.loop) {
+              setTimeout(changeSlide("right"),0);
+              clearInterval(scroll);
+              scroll = setInterval(function() {
+                changeSlide("right");
+            }, settings.scrollSpeed, "linear");
+            } else {
+              slideNumber = amountOfSlides - 1;
+          }
         }
         // Add and remove selected class, get title and transition
         transition("start", direction);
@@ -146,7 +161,6 @@
                 slides.animate({
                   marginLeft: marginOffset
                 }, settings.transitionSpeed, "linear");
-                titles.eq(slideNumber).slideUp(settings.transitionSpeed);
                 break;
               case "finish":
                 titles.eq(slideNumber).show().animate({marginTop: "-=100%", marginLeft: marginOffset}, 0)
@@ -229,8 +243,8 @@ $(document).ready(function() {
     showDots: true,
     showIndicator: true,
     transition: "slide",
-    loop: false,
-    autoScroll: false,
+    loop: true,
+    autoScroll: true,
     transitionSpeed: 1000
 
   };
