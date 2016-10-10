@@ -2,200 +2,118 @@
 
   "use strict";
 
-  $.fn.extend({
-    // Usage:
-    // jQuery(selector).pluginName({property:'value'});
-    merryGoSlide: function(settings) {
-      // assigned 'this' to plugin
-      var plugin = this;
-      // Title of each Slide - from alt tag of image
-      var titles = $(".o-carousel__slides h1"),
-        // Box showing "slide X of Y"
-        indicator = $("#o-carousel__slide-indicator"),
-        // Left amd right navigation buttons
-        buttonLeft = $(".o-carousel__nav--left"),
-        buttonRight = $(".o-carousel__nav--right"),
-        // Collection of all carousel images
-        slides = $(".o-carousel__slides").find("img"),
-        // Default setting - display first image on start
-        slideNumber = 0,
-        // UL of dot indicators
-        dots = $(".o-carousel__dots"),
-        // Number of images
-        amountOfSlides = slides.length,
-        // Selects the current slide from collection of slides
-        currentSlide = $(slides[slideNumber]),
-        // Collection of dot indicators
-        dot = dots.find("li"),
-        // How far to offset slides when sliding horizontally
-        marginOffset = 0,
-        // The slide after current one
-        nextSlide = $(slides[slideNumber + 1]),
-        // Set a variable for autoscrolling
-        scroll;
+  var pluginName = "merryGoSlide",
+    // Plugin default settings
+    defaults = {
+      loop: false,
+      theme: "dark",
+      showDots: false,
+      autoScroll: false,
+      transition: "basic",
+      scrollSpeed: 4000,
+      showIndicator: false,
+      transitionSpeed: 1000
+    };
 
-      // Plugin default settings
-      plugin.defaults = {
-        loop: false,
-        theme: "dark",
-        showDots: false,
-        autoScroll: false,
-        transition: "basic",
-        scrollSpeed: 4000,
-        showIndicator: false,
-        transitionSpeed: 1000
-      };
+  function Plugin(element, options) {
+    this.element = element;
+    this.settings = $.extend({}, defaults, options);
+    this._defaults = defaults;
+    this._name = pluginName;
 
-      settings = $.extend({}, plugin.defaults, settings);
+    // Title of each Slide - from alt tag of image
+    this.titles = $(".o-carousel__slides h1");
+    this.carousel = $(".o-carousel container");
+    // Box showing "slide X of Y"
+    this.indicator = $("#o-carousel__slide-indicator");
+    // Left amd right navigation buttons
+    this.buttonLeft = $(".o-carousel__nav--left");
+    this.buttonRight = $(".o-carousel__nav--right");
+    // Collection of all carousel images
+    this.slides = $(".o-carousel__slides").find("img");
+    // Default setting - display first image on start
+    this.slideNumber = 0;
+    // UL of dot indicators
+    this.dots = $(".o-carousel__dots");
+    // Number of images
+    this.amountOfSlides = this.slides.length;
+    // Selects the current slide from collection of slides
+    this.currentSlide = $(this.slides[this.slideNumber]);
+    // Collection of dot indicators
+    this.dot = this.dots.find("li");
+    // How far to offset slides when sliding horizontally
+    this.marginOffset = 0;
+    // The slide after current one
+    this.nextSlide = $(this.slides[this.slideNumber + 1]);
+    // Set a variable for autoscrolling
+    this.scroll = undefined;
+    this.init();
+  }
 
+  $.extend(Plugin.prototype, {
+    init: function() {
+
+      // Set this to pluginProxy for click events to access
+      var pluginProxy = this;
+      this.titles.hide();
+      this.getTitle();
+      this.titles.eq(this.slideNumber).fadeIn(this.settings.transitionSpeed);
+      this.slides.css({
+        opacity: 0
+      });
+      this.currentSlide.css({
+        opacity: 1,
+        "z-index": 1
+      }).addClass("selected");
+      this.dot.eq(0).addClass("current");
+      this.changeDots();
+      if (this.settings.loop) {
+        this.buttonLeft.show();
+      } else {
+        this.buttonLeft.css({
+          "pointer-events": "none"
+        }).hide();
+      }
       // Check for user creating their own settings
-      if (settings.showDots) {
-        dots.show();
+      if (this.settings.showDots) {
+        this.dots.show();
       } else {
-        dots.hide();
+        this.dots.hide();
       }
 
-      if (settings.showIndicator) {
-        indicator.show();
+      if (this.settings.showIndicator) {
+        this.indicator.show();
       } else {
-        indicator.hide();
+        this.indicator.hide();
       }
 
-      if (settings.autoScroll) {
-        scroll = setInterval(function() {
+      if (this.settings.autoScroll) {
+        this.scroll = setInterval(function() {
           changeSlide("right");
-        }, settings.scrollSpeed, "linear");
+        }, this.settings.scrollSpeed, "linear");
       }
 
-      function getCurrentSlide() {
-        return $(slides[slideNumber]);
-      }
-
-      function getTitle() {
-        currentSlide = getCurrentSlide();
-        titles.fadeOut(settings.transitionSpeed);
-        indicator.text((slideNumber + 1) + " of " + amountOfSlides);
-      }
-
-      function changeSlide(direction) {
-        buttonLeft.css({
-          "pointer-events": "auto"
-        }).show();
-        buttonRight.css({
-          "pointer-events": "auto"
-        }).show();
-        // Change slides in loop
-        if ((direction == "right") && (slideNumber < amountOfSlides - 1)) {
-          slideNumber += 1;
-        } else if ((direction == "left") && (slideNumber > 0)) {
-          slideNumber -= 1;
-        } else if ((direction == "right") && (slideNumber == amountOfSlides - 1)) {
-            if (settings.autoScroll && !settings.loop) {
-              clearInterval(scroll);
-              changeSlide("left");
-              scroll = setInterval(function() {
-                changeSlide("left");
-            }, settings.scrollSpeed, "linear");
-            } else {
-              slideNumber = 0;
-          }
-        } else if ((direction == "left") && (slideNumber === 0)) {
-            if (settings.autoScroll && !settings.loop) {
-              setTimeout(changeSlide("right"),0);
-              clearInterval(scroll);
-              scroll = setInterval(function() {
-                changeSlide("right");
-            }, settings.scrollSpeed, "linear");
-            } else {
-              slideNumber = amountOfSlides - 1;
-          }
-        }
-        // Add and remove selected class, get title and transition
-        transition("start", direction);
-        currentSlide.removeClass("selected");
-        getTitle();
-        currentSlide.addClass("selected");
-        transition("finish", direction);
-        changeDots();
-        // Check for user not wanting a loop
-        if ((direction == "right" || direction == "none") && (slideNumber == amountOfSlides - 1) && !settings.loop) {
-          buttonRight.css({
-            "pointer-events": "none"
-          }).hide();
-        } else if ((direction == "left" || direction == "none") && (slideNumber === 0) && !settings.loop) {
-          buttonLeft.css({
-            "pointer-events": "none"
-          }).hide();
-        }
-      }
-
-      function changeDots() {
-        $(".current").removeClass("current");
-        dot.eq(slideNumber).addClass("current");
-      }
-
-      function transition(stage, direction) {
-        switch (settings.transition) {
-          case "basic":
-            if (stage == "start") {
-              currentSlide.css({
-                opacity: 0
-              });
-            } else {
-              titles.eq(slideNumber).fadeIn(settings.transitionSpeed / 2);
-              currentSlide.css({
-                opacity: 1
-              });
-            }
-            break;
-          case "slide":
-            $(".o-carousel__slides li").css({
-              position: "relative"
-            });
-            slides.css({
-              opacity: 1
-            });
-            switch (stage) {
-              case "start":
-                marginOffset = slideNumber * -100 + "%";
-                slides.animate({
-                  marginLeft: marginOffset
-                }, settings.transitionSpeed, "linear");
-                break;
-              case "finish":
-                titles.eq(slideNumber).show().animate({marginTop: "-=100%", marginLeft: marginOffset}, 0)
-                .animate({
-                  marginTop: "+=100%"
-                }, settings.transitionSpeed, "linear");
-                break;
-            }
-            break;
-          case "fade":
-            if (stage == "start") {
-              currentSlide.animate({
-                opacity: 0
-              }, settings.transitionSpeed);
-            } else {
-              titles.eq(slideNumber).fadeIn(settings.transitionSpeed);
-              currentSlide.animate({
-                opacity: 1
-              }, settings.transitionSpeed);
-            }
-            break;
-        }
-      }
       // Left nav button clicked
-      buttonLeft.click(function(event) {
-        changeSlide("left");
+      this.buttonLeft.click(function(event) {
+        pluginProxy.changeSlide("left");
       });
 
       // Right nav button clicked
-      buttonRight.click(function(event) {
-        changeSlide("right");
+      this.buttonRight.click(function(event) {
+        pluginProxy.changeSlide("right");
+      });
+
+      // Arrow keys pressed
+      $("html").keydown(function(event) {
+        if (event.which == 37) {
+          pluginProxy.changeSlide("left");
+        } else if (event.which == 39) {
+          pluginProxy.changeSlide("right");
+        }
       });
 
       // Nav dot clicked
-      dot.click(function(event) {
+      this.dot.click(function(event) {
         var currentDot = $(".current");
         var selectedDot = $(event.target);
         if (selectedDot.hasClass("current") ||
@@ -203,38 +121,151 @@
           selectedDot.addClass("current");
           currentDot.removeClass("current");
         }
-        slideNumber = selectedDot.index();
-        changeSlide("none");
+        pluginProxy.slideNumber = selectedDot.index();
+        pluginProxy.changeSlide("none");
       });
+    },
 
-      // Run on plugin creation
-      titles.hide();
-      getTitle();
-      titles.eq(slideNumber).fadeIn(settings.transitionSpeed);
-      slides.css({
-        opacity: 0
-      });
-      currentSlide.css({
-        opacity: 1,
-        "z-index": 1
-      }).addClass("selected");
-      dot.eq(0).addClass("current");
-      changeDots();
-      if (settings.loop) {
-        buttonLeft.show();
+    foo_public_method: function() {
+      foo_private_method.call(this);
+    },
+
+    getTitle: function() {
+      this.currentSlide = this.getCurrentSlide();
+      if (this.settings.transition == "basic") {
+        this.titles.hide();
       } else {
-        buttonLeft.css({
+        this.titles.fadeOut(this.settings.transitionSpeed);
+      }
+      this.indicator.text((this.slideNumber + 1) + " of " + this.amountOfSlides);
+    },
+
+    getCurrentSlide: function() {
+      return $(this.slides[this.slideNumber]);
+    },
+
+    changeSlide: function(direction) {
+      this.buttonLeft.css({
+        "pointer-events": "auto"
+      }).show();
+      this.buttonRight.css({
+        "pointer-events": "auto"
+      }).show();
+      // Change slides in loop
+      if ((direction == "right") && (this.slideNumber < this.amountOfSlides - 1)) {
+        this.slideNumber += 1;
+      } else if ((direction == "left") && (this.slideNumber > 0)) {
+        this.slideNumber -= 1;
+      } else if ((direction == "right") && (this.slideNumber == this.amountOfSlides - 1)) {
+        if (this.settings.autoScroll && !this.settings.loop) {
+          clearInterval(this.scroll);
+          this.changeSlide("left");
+          this.scroll = setInterval(function() {
+            this.changeSlide("left");
+          }, this.settings.scrollSpeed, "linear");
+        } else {
+          this.slideNumber = 0;
+        }
+      } else if ((direction == "left") && (this.slideNumber === 0)) {
+        if (this.settings.autoScroll && !this.settings.loop) {
+          setTimeout(this.changeSlide("right"), 0);
+          clearInterval(this.scroll);
+          this.scroll = setInterval(function() {
+            this.changeSlide("right");
+          }, this.settings.scrollSpeed, "linear");
+        } else {
+          this.slideNumber = this.amountOfSlides - 1;
+        }
+      }
+      // Add and remove selected class, get title and transition
+      this.transition("start", direction);
+      this.currentSlide.removeClass("selected");
+      this.getTitle();
+      this.currentSlide.addClass("selected");
+      this.transition("finish", direction);
+      this.changeDots();
+      // Check for user not wanting a loop
+      if ((direction == "right" || direction == "none") && (this.slideNumber == this.amountOfSlides - 1) && !this.settings.loop) {
+        this.buttonRight.css({
+          "pointer-events": "none"
+        }).hide();
+      } else if ((direction == "left" || direction == "none") && (this.slideNumber === 0) && !this.settings.loop) {
+        this.buttonLeft.css({
           "pointer-events": "none"
         }).hide();
       }
-      return $(plugin).each(function() {
+    },
 
-        // Plugin logic
-        // Calling the function:
-        // jQuery(selector).pluginName(options);
-      });
+    changeDots: function() {
+      $(".current").removeClass("current");
+      this.dot.eq(this.slideNumber).addClass("current");
+    },
+
+    transition: function(stage, direction) {
+      switch (this.settings.transition) {
+        case "basic":
+          if (stage == "start") {
+            this.currentSlide.css({
+              opacity: 0
+            });
+          } else {
+            this.titles.eq(this.slideNumber).show();
+            this.currentSlide.css({
+              opacity: 1
+            });
+          }
+          break;
+        case "slide":
+          $(".o-carousel__slides li").css({
+            position: "relative"
+          });
+          this.slides.css({
+            opacity: 1
+          });
+          switch (stage) {
+            case "start":
+              this.marginOffset = this.slideNumber * -100 + "%";
+              this.slides.animate({
+                marginLeft: this.marginOffset
+              }, this.settings.transitionSpeed, "linear");
+              break;
+            case "finish":
+              this.titles.eq(this.slideNumber).show().animate({
+                  marginTop: "-=100%",
+                  marginLeft: this.marginOffset
+                }, 0)
+                .animate({
+                  marginTop: "+=100%"
+                }, this.settings.transitionSpeed, "linear");
+              break;
+          }
+          break;
+        case "fade":
+          if (stage == "start") {
+            this.currentSlide.animate({
+              opacity: 0
+            }, this.settings.transitionSpeed);
+          } else {
+            this.titles.eq(this.slideNumber).fadeIn(this.settings.transitionSpeed);
+            this.currentSlide.animate({
+              opacity: 1
+            }, this.settings.transitionSpeed);
+          }
+          break;
+      }
     }
+
   });
+
+  $.fn[pluginName] = function(options) {
+    return this.each(function() {
+      if (!$.data(this, "plugin_" + pluginName)) {
+        $.data(this, "plugin_" +
+          pluginName, new Plugin(this, options));
+      }
+    });
+  };
+
 })(jQuery, window, document);
 
 $(document).ready(function() {
@@ -244,7 +275,7 @@ $(document).ready(function() {
     showIndicator: true,
     transition: "slide",
     loop: true,
-    autoScroll: true,
+    autoScroll: false,
     transitionSpeed: 1000
 
   };
