@@ -2,6 +2,21 @@
 
   "use strict";
 
+
+    var getTitle = function() {
+      this.currentSlide = getCurrentSlide.call(this);
+      if (this.settings.transition == "basic") {
+        this.titles.hide();
+      } else {
+        this.titles.fadeOut(this.settings.transitionSpeed);
+      }
+      this.indicator.text((this.slideNumber + 1) + " of " + this.amountOfSlides);
+    };
+
+    var getCurrentSlide = function() {
+      return $(this.slides[this.slideNumber]);
+    };
+
   var pluginName = "merryGoSlide",
     // Plugin default settings
     defaults = {
@@ -56,7 +71,7 @@
       // Set this to pluginProxy for click events to access
       var pluginProxy = this;
       this.titles.hide();
-      this.getTitle();
+      getTitle.call(this);
       this.titles.eq(this.slideNumber).fadeIn(this.settings.transitionSpeed);
       this.slides.css({
         opacity: 0
@@ -126,24 +141,6 @@
       });
     },
 
-    foo_public_method: function() {
-      foo_private_method.call(this);
-    },
-
-    getTitle: function() {
-      this.currentSlide = this.getCurrentSlide();
-      if (this.settings.transition == "basic") {
-        this.titles.hide();
-      } else {
-        this.titles.fadeOut(this.settings.transitionSpeed);
-      }
-      this.indicator.text((this.slideNumber + 1) + " of " + this.amountOfSlides);
-    },
-
-    getCurrentSlide: function() {
-      return $(this.slides[this.slideNumber]);
-    },
-
     changeSlide: function(direction) {
       this.buttonLeft.css({
         "pointer-events": "auto"
@@ -180,7 +177,7 @@
       // Add and remove selected class, get title and transition
       this.transition("start", direction);
       this.currentSlide.removeClass("selected");
-      this.getTitle();
+      getTitle.call(this);
       this.currentSlide.addClass("selected");
       this.transition("finish", direction);
       this.changeDots();
