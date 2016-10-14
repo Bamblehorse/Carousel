@@ -4,7 +4,7 @@
 
 
   var getTitle = function() {
-    this.currentSlide = getCurrentSlide.call(this);
+    this.currentSlide = this.getCurrentSlide();
     if (this.settings.transition == "basic") {
       this.titles.hide();
     } else {
@@ -13,8 +13,9 @@
     this.indicator.text((this.slideNumber + 1) + " of " + this.amountOfSlides);
   };
 
-  var getCurrentSlide = function() {
-    return $(this.slides[this.slideNumber]);
+  var changeDots = function() {
+    $(".current").removeClass("current");
+    this.dot.eq(this.slideNumber).addClass("current");
   };
 
   var pluginName = "merryGoSlide",
@@ -81,7 +82,7 @@
         "z-index": 1
       }).addClass("selected");
       this.dot.eq(0).addClass("current");
-      this.changeDots();
+      changeDots.call(this);
       if (this.settings.loop) {
         this.buttonLeft.show();
       } else {
@@ -180,7 +181,7 @@
       getTitle.call(this);
       this.currentSlide.addClass("selected");
       this.transition("finish", direction);
-      this.changeDots();
+      changeDots.call(this);
       // Check for user not wanting a loop
       if ((direction == "right" || direction == "none") && (this.slideNumber == this.amountOfSlides - 1) && !this.settings.loop) {
         this.buttonRight.css({
@@ -193,9 +194,8 @@
       }
     },
 
-    changeDots: function() {
-      $(".current").removeClass("current");
-      this.dot.eq(this.slideNumber).addClass("current");
+    getCurrentSlide : function() {
+      return $(this.slides[this.slideNumber]);
     },
 
     transition: function(stage, direction) {
