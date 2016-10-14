@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 //Import Variables and Inuit
-@import "inuit/inuit";
+@import "inuit";
 
 //Continue as normal
 
@@ -13,15 +13,5 @@ $primary-color: black;
 body {
   font: 100% $font-stack;
   color: $primary-color;
-  background-color: #00CCFF;
-}
-
-
-header {
-  width: 100%;
-  font-size: 2em;
-  text-align: center;
-  background-color: black;
-  border: 2px double ;
-  color: white;
+  background-color:#FFF;
 }

@@ -1,29 +1,37 @@
 "use strict";
 
 // Required packages
-var gulp = require('gulp');
-var notify = require('gulp-notify');
-var watch = require('gulp-watch');
-var sass = require('gulp-sass');
-var del = require('del');
-var plumber = require('gulp-plumber');
-var browserSync = require('browser-sync').create();
+var gulp = require('gulp'),
+    notify = require('gulp-notify'),
+    watch = require('gulp-watch'),
+    sass = require('gulp-sass'),
+    useref = require('gulp-useref'),
+    cssnano = require('gulp-cssnano'),
+    uglify = require('gulp-uglify'),
+    imagemin = require('gulp-imagemin'),
+    cache = require('gulp-cache'),
+    gulpIf = require('gulp-if'),
+    del = require('del'),
+    plumber = require('gulp-plumber'),
+    runSequence = require('run-sequence'),
+    browserSync = require('browser-sync').create();
 
 //Default Gulp Task
-gulp.task('default', ['watch']);
-
+gulp.task('default', function(callback) {
+  runSequence('images', 'watch','browserSync','useref',callback);
+});
 // Loads local server
 gulp.task('browserSync', function() {
   browserSync.init({
     server: {
-      baseDir: 'src'
+      baseDir: 'dist'
     },
   })
 });
 
 // Sass Variables
 var sassFolder = 'src/scss/**/*.scss';
-var cssFolder = 'src/dist/css';
+var cssFolder = 'src/css/';
 var sassStyle = {
   outputStyle: 'expanded'
 };
@@ -43,31 +51,60 @@ gulp.task('sass', function() {
     .pipe(sass(sassStyle))
     .pipe(gulp.dest(cssFolder))
     .pipe(notify({message: 'Compiled SASS to CSS'}))
-    .pipe(browserSync.reload({stream: true}))
-    .pipe(notify({message: 'Css Injected, Server Reloaded'}))
 });
 
 gulp.task('refresh', function() {
   return gulp
-    .src('src')
+    .src('dist')
     .pipe(plumber({errorHandler: onError}))
     .pipe(browserSync.reload({stream: true}))
     .pipe(notify({message: 'Changes Detected, Server Reloaded'}))
   });
 
-// Clean CSS folders ready for compiling SASS
-gulp.task('clean', function () {
-    return del([
-      'src/css/**/*'
-      ]);
+gulp.task('cleanCSS', function() {
+  del(['src/css/**/*']);
 });
 
+gulp.task('cleanJs', function() {
+  del(['dist/js/**/*']);
+});
+
+gulp.task('cleanHtml', function() {
+  del(['dist/**/*.html']);
+});
+
+gulp.task('images', function() {
+  return gulp.src('src/img/**/*.+(png|jpg|gif|svg)')
+    .pipe(cache(imagemin()))
+    .pipe(gulp.dest('dist/img'))
+});
+
+gulp.task('useref', function() {
+  return gulp.src('src/*.html')
+    .pipe(plumber({errorHandler: onError}))
+    .pipe(useref())
+    .pipe(gulpIf('*.js', uglify()))
+    .pipe(gulpIf('*.css', cssnano()))
+    .pipe(gulp.dest('dist'))
+});
+
+gulp.task('sassWatch', function(callback) {
+  runSequence('cleanCSS','sass','useref', 'refresh', callback);
+});
+
+gulp.task('htmlWatch', function(callback) {
+  runSequence('cleanHtml','useref', 'refresh', callback);
+});
+
+gulp.task('jsWatch', function(callback) {
+  runSequence('cleanJs','useref', 'refresh', callback);
+});
 // Watch folders and files for changes
-gulp.task('watch', ['browserSync', 'sass'], function() {
+gulp.task('watch', function() {
   // Watch Sass
-  gulp.watch('src/scss/**/*.scss', ['clean','sass']);
+  gulp.watch(['src/scss/**/*.scss'],['sassWatch']);
   // Watch html
-  gulp.watch('src/**/*.html', ['refresh']);
+  gulp.watch('src/**/*.html', ['htmlWatch']);
   //watch js
-  gulp.watch('app/js/**/*.js', ['refresh']);
+  gulp.watch('src/js/**/*.js', ['jsWatch']);
 });
