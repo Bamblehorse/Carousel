@@ -26,9 +26,7 @@ $slides--total: 4;
   &:before { content:''; float: left; padding-bottom: $padding;  }
   &:after  { content:''; display: table; clear: both;  }
 }
-.o-carousel__container {
 
-};
 .o-carousel {
   margin: auto;
   overflow: hidden;
@@ -83,7 +81,6 @@ $slides--total: 4;
   opacity: 0.8;
   cursor: pointer;
   transform: scale(1.1,1.1);
-  // box-shadow: 1px 1px 0px 0px gray;
 }
 
 .o-carousel__dots .current{
