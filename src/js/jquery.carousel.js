@@ -3,19 +3,19 @@
   "use strict";
 
 
-    var getTitle = function() {
-      this.currentSlide = getCurrentSlide.call(this);
-      if (this.settings.transition == "basic") {
-        this.titles.hide();
-      } else {
-        this.titles.fadeOut(this.settings.transitionSpeed);
-      }
-      this.indicator.text((this.slideNumber + 1) + " of " + this.amountOfSlides);
-    };
+  var getTitle = function() {
+    this.currentSlide = getCurrentSlide.call(this);
+    if (this.settings.transition == "basic") {
+      this.titles.hide();
+    } else {
+      this.titles.fadeOut(this.settings.transitionSpeed);
+    }
+    this.indicator.text((this.slideNumber + 1) + " of " + this.amountOfSlides);
+  };
 
-    var getCurrentSlide = function() {
-      return $(this.slides[this.slideNumber]);
-    };
+  var getCurrentSlide = function() {
+    return $(this.slides[this.slideNumber]);
+  };
 
   var pluginName = "merryGoSlide",
     // Plugin default settings
